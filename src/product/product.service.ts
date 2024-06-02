@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Product } from './product.entity';
 import { Repository } from 'typeorm';
-import { CreateProductDto } from './dto/create-product.dto';
+
 import { ListProductsDto } from './dto/list-product.dto';
 
 @Injectable()
@@ -16,11 +16,6 @@ export class ProductService {
     return this.productRepository.findOne({
       where: options,
     });
-  }
-
-  async addProduct(createProductDto: CreateProductDto) {
-    const product = this.productRepository.create(createProductDto);
-    return this.productRepository.save(product);
   }
 
   async listProducts(listProductsDto: ListProductsDto) {
