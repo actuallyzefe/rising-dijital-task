@@ -68,6 +68,11 @@ export class OrderService {
 
   async listOrders(userId: number, listOrdersDto: ListOrdersDto) {
     const { page = 1, limit = 10 } = listOrdersDto;
+    const user = await this.userService.findOne({ id: userId });
+
+    if (!user) {
+      throw new NotFoundException('User Not Found');
+    }
 
     const [results, total] = await this.orderRepository.findAndCount({
       where: {
