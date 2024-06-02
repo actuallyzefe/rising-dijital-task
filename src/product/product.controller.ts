@@ -6,7 +6,7 @@ import { ListProductsDto } from './dto/list-product.dto';
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Get()
+  @Get('list')
   async listProducts(@Query() listProductsDto: ListProductsDto) {
     return this.productService.listProducts(listProductsDto);
   }

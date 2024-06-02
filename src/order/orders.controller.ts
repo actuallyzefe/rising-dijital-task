@@ -18,7 +18,7 @@ import { ListProductsDto } from 'src/product/dto/list-product.dto';
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
-  @Post()
+  @Post('create')
   async createOrder(
     @Req() req: Request,
     @Body() createOrderDto: CreateOrderDto,
@@ -26,7 +26,7 @@ export class OrderController {
     return this.orderService.create(req.user.id, createOrderDto);
   }
 
-  @Get()
+  @Get('my-orders')
   async listOrders(
     @Req() req: Request,
     @Query() listOrdersDto: ListProductsDto,
