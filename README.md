@@ -1,73 +1,67 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Rising Dijital Order App
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### How to run?
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+You must have [Docker](https://www.docker.com/) installed on your machine.
 
-## Description
+navigate to the project directory.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+docker build -t <image_name>
 
-## Installation
+docker run -p 3000:3000 <image_name>
 
-```bash
-$ npm install
-```
+Don't forget to add your own .env credentials. In this project you just need one. <b>JWT_SECRET</b>
 
-## Running the app
+navigate to <b>http://localhost:3000/auth/register</b> 
 
-```bash
-# development
-$ npm run start
+After successfully registered you can login now from <b>http://localhost:3000/auth/login</b>
 
-# watch mode
-$ npm run start:dev
+If you want to view products you can navigate to <b>http://localhost:3000/product/list</b>
 
-# production mode
-$ npm run start:prod
-```
+At first you won't be able to place an order because you don't have a balance. Therefore, you need to make a deposit first
 
-## Test
+navigate to <b>http://localhost:3000/user/deposit</b>
 
-```bash
-# unit tests
-$ npm run test
+Great! Now you are able to create your first order! Navigate to  <b>http://localhost:3000/order/create</b>
 
-# e2e tests
-$ npm run test:e2e
+You can view your orders from  <b>http://localhost:3000/order/my-orders</b>
 
-# test coverage
-$ npm run test:cov
-```
+## How it works?
 
-## Support
+#### Authenticaion
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Under the hood, when a register request comes in, The backend hashing password and creating a user in SQLite with given informations. On the login request, the backend checking password with hash and giving if passwords matches, hashing user without 'password' field and returning a response including jwt; ⁠ { token: 'eyJ...'} ⁠
 
-## Stay in touch
+The jwt will be checked on the backend and if able to decode, it will perform the operation in the request.\
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Tech Stack
 
-## License
+•⁠  ⁠NestJS
+•⁠  ⁠TypeScript
+•⁠  ⁠ExpressJS
+•⁠  ⁠SQLite
+•⁠  ⁠AWS ECR
+•⁠  ⁠AWS ECS (Fargate)
 
-Nest is [MIT licensed](LICENSE).
+## Why I used This Stack?
+
+#### Backend
+
+NestJS is very powerful for developing high-scale applications. It increases development speed with built-in modules.
+
+#### Deployment
+
+Github Actions is provides fast and easy way to create pipelines. I can publish image to ECR and deploy to ECS on a fargate instance. ECS enables us to scale app to some point where we need to Kubernetes.
+
+## What to Improve?
+
+There are a lot of things to improve but due to task complete time limit I'm not able to do them all.
+
+•⁠  ⁠Backend:
+  - It would be very nice to have a swagger documentation.
+  - I could be setting up a logging service with winston and monitoring with newrelic or add a ray tracing such as zipkin or opentelemetry.
+  - I could be writing a pipeline with CircleCI and deploying it to Kubernetes.
+  - It would be nice to have 2 layered(pod level, provider level) cache for improving performance and reducing costs.
+  - I could be writing multiple product checkouts.
+  - I could be integrating the app with a payment provider.
+
