@@ -20,8 +20,6 @@ export class UserService {
       relations: ['orders', 'orders.products'],
     });
 
-    delete user.password;
-
     return user;
   }
 

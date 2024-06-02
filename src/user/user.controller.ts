@@ -9,11 +9,6 @@ import { DepositDto } from './dto/deposit.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('me')
-  async me(@Req() req: Request) {
-    return this.userService.findOne({ id: req.user.id });
-  }
-
   @Post('deposit')
   async deposit(@Req() req: Request, @Body() depositDto: DepositDto) {
     return this.userService.deposit(req.user.id, depositDto.amount);

@@ -27,6 +27,8 @@ export class OrderService {
 
     if (!user) throw new NotFoundException('User Not Found');
 
+    delete user.password;
+
     const userBalance = user.balance;
 
     const product = await this.productService.findOne({
