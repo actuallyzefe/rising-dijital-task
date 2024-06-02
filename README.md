@@ -14,7 +14,7 @@ Don't forget to add your own .env credentials. In this project you just need one
 
 If you just want to **view** products, you do not need to register or login. You can navigate to <b>http://localhost:3000/product/list</b>
 
-navigate to <b>http://localhost:3000/auth/register</b> 
+If you want to create orders, you must be register first from <b>http://localhost:3000/auth/register</b> 
 
 After successfully registered you can login now from <b>http://localhost:3000/auth/login</b>
 
