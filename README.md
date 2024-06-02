@@ -12,11 +12,11 @@ docker run -p 3000:3000 <image_name>
 
 Don't forget to add your own .env credentials. In this project you just need one. <b>JWT_SECRET</b>
 
+If you just want to **view** products, you do not need to register or login. You can navigate to <b>http://localhost:3000/product/list</b>
+
 navigate to <b>http://localhost:3000/auth/register</b> 
 
 After successfully registered you can login now from <b>http://localhost:3000/auth/login</b>
-
-If you want to view products you can navigate to <b>http://localhost:3000/product/list</b>
 
 At first you won't be able to place an order because you don't have a balance. Therefore, you need to make a deposit first
 
