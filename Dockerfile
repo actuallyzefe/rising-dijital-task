@@ -1,22 +1,14 @@
+FROM node:16-alpine
 
-FROM node:18-alpine
-
-WORKDIR /usr/src/app
-
-
-COPY package*.json ./
-
-
-RUN npm install
-
+WORKDIR /usr/app
 
 COPY . .
 
+RUN npm install
+
+RUN npm run build
 
 RUN apk add --no-cache sqlite
 
-
-EXPOSE 3000
-
-
-CMD ["npm", "run", "start:prod"]
+# Start the server using the production build
+CMD [ "node", "dist/main.js" ]
